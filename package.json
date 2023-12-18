@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abhaysinghthakur197/Bloggin-App.git"
+    "url": "git+https://github.com/abhaysinghthakur197/Blogging-App.git"
   },
   "author": "Abhay Thakur",
   "license": "ISC",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/abhaysinghthakur197/Bloggin-App#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
