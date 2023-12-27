@@ -8,6 +8,9 @@ const cookieParser = require('cookie-parser')
 // User Route
 const userRoute = require('./routes/user')
 //  *** //
+// Blog Route
+const blogRoute = require("./routes/blog")
+// **** //
 
 // Connect MongoDB
 const { connectToMongoDB } = require('./connect')
@@ -43,6 +46,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/user", userRoute);
+app.use("/blog",blogRoute);
 
 app.listen(PORT, () =>
     console.log(`Server started at PORT:${PORT}`)
