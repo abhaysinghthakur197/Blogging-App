@@ -4,7 +4,7 @@ function checkForAuthenticationCookie(cookieName) {
     return (req,res, next) => {
         const tokenCookieValue = req.cookies[cookieName];
     if(!tokenCookieValue) {
-        next();
+        return next();
     }
 
     try {
@@ -12,10 +12,10 @@ function checkForAuthenticationCookie(cookieName) {
         req.user = userPayload;
     } catch(error) {}
 
-    next();
+    return next();
     };
 }
 
 module.exports = {
-    checkForAuthenticationCookie
+    checkForAuthenticationCookie,
 }
