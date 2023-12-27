@@ -12,6 +12,10 @@ const userRoute = require('./routes/user')
 const blogRoute = require("./routes/blog")
 // **** //
 
+// Rendering blog in home page
+const Blog = require("./models/blog")
+//  *** //
+
 // Connect MongoDB
 const { connectToMongoDB } = require('./connect')
 const { checkForAuthenticationCookie } = require('./middlewares/authentication')
@@ -29,19 +33,31 @@ app.set('views', path.resolve('./views'))
 // *** //
 
 
-// middleware -> 
+// middleware start -> 
+
 // To work with form data 
 app.use(express.urlencoded({ extended: false }))
 // *** //
+
 // To work with cookie
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 //  ***** //
 
+// To show the image in home page because express thick /blog/blog._id is a route
+app.use(express.static(path.resolve("./public")));
+// ****//
 
-app.get('/', (req, res) => {
+// Middleware End *** //
+
+
+app.get('/', async(req, res) => {
+    // adding blog to show in home page
+    const allBlogs = await Blog.find({})
+    // **** //
     res.render('Home', {
         user: req.user,
+        blogs: allBlogs
     })
 })
 
