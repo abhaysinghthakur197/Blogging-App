@@ -11,6 +11,12 @@ router.get("/signup", (req,res) => {
     return res.render("signup");
 })
 
+// logout route
+router.get("/logout", (req,res) => {
+    res.clearCookie("token").redirect("/");
+});
+// **** //
+
 router.post("/signin", async (req,res) => {
     const {email,password} = req.body;
     // const userMatch = await User.matchPassword(email, password);
