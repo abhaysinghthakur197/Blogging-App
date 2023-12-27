@@ -24,4 +24,8 @@
 17. add middleware express.urlencoded to get the form data.
 18. added login router for login in user.js routes folder
 19. Use mongoose virtual function for matching the hash password in login user. (* IMP }
-
+20. install jsonwebtoken 
+21. created authentication.js for token generation and validation
+22. add authentication.js into user model
+23. add matchpasswordandGenerateTokoen function in user routes in try catch blocks
+24. added alert for incorrect password.

@@ -4,6 +4,10 @@ const { Schema, model } = require('mongoose')
 const { createHmac, randomBytes } = require('crypto')
 //  *** //
 
+// createTokenForUser for generate token of user
+const {createTokenForUser} = require('../services/authentication')
+//  ***** //
+
 const userSchema = new Schema({
     username: {
         type: String,
@@ -37,6 +41,7 @@ const userSchema = new Schema({
 
 // mongoose pre function
 // It is used to save the password in hash form  
+// It is a closure
 userSchema.pre("save", function (next) {
     const user = this;
 
@@ -58,7 +63,32 @@ userSchema.pre("save", function (next) {
 
 // Virtual Function for matching the hash password
 
-userSchema.static("matchPassword", async function (email, password) {
+// userSchema.static("matchPassword", async function (email, password) {
+//     const user = await this.findOne({ email });
+//     if (!user) throw new Error("User not found!");
+
+//     // User password store in db
+//     const salt = user.salt;
+//     const hashedPassword = user.password;
+//     //  *** //
+
+//     // User provided password for login 
+//     const userProvidedHash = createHmac("sha256", salt)
+//         .update(password)
+//         .digest("hex");
+//     //  ****** //
+
+//     if (hashedPassword !== userProvidedHash)
+//         throw new Error("Incorrect Password!")
+
+//     // if match password then it will only return user
+//     return user;
+
+// })
+//  ****** //
+
+// token return after matching the salt 
+userSchema.static("matchPasswordandGenerateToken", async function (email, password) {
     const user = await this.findOne({ email });
     if (!user) throw new Error("User not found!");
 
@@ -76,11 +106,13 @@ userSchema.static("matchPassword", async function (email, password) {
     if (hashedPassword !== userProvidedHash)
         throw new Error("Incorrect Password!")
 
-    // if match password then it will only return user
-    return user;
+    // if match password then it will only return user token
+    const token = createTokenForUser(user)
+    return token;
 
 })
-//  ****** //
+
+//  *****  //
 
 
 const User = model('user', userSchema);
