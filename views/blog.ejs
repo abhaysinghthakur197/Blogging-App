@@ -20,20 +20,39 @@
             </p>
         </div>
 
+        <!-- user profile section -->
         <div class="container mt-4">
             <img src="<%= blog.createdBy.profileImageURL %>" width="50px">
             <%= blog.createdBy.username %>
         </div>
 
+        <!-- comment section -->
+
         <div class="container mt-4">
-            <h1>Comment:</h1>
-            <form action="/user/signin" method="post">
-                <div class="mb-3">
-                    <input type="text" name="content" class="form-control" placeholder="Enter your comment" />
-                    <button class=" mt-4 btn btn-primary" type="submit">Add Comment</button>
-                </div>
-            </form>
+            <h1>Comment: (<%= comments.length %>)</h1>
+            <% if (locals.user) { %>
+                <form action="/blog/comment/<%= blog._id %>" method="POST">
+                    <div class="mb-3">
+                        <input type="text" name="content" class="form-control" placeholder="Enter your comment" />
+                        <button class=" mt-4 btn btn-primary" type="submit">Add Comment</button>
+                    </div>
+                </form>
+            <% } %>
         </div>
+
+        <!-- show comments -->
+        <div class="mt-4 container">
+            <% comments.forEach(comment=> { %>
+                <div>
+                    <img src="<%= comment.createdBy.profileImageURL %>" width="80px">
+                    <%= comment.createdBy.username %>
+                        <pre><%= comment.content %></pre>
+                </div>
+                <% }) %>
+        </div>
+
+
+
         <%- include('./partials/scripts') %>
 </body>
 
