@@ -30,6 +30,18 @@ router.get("/add-new-blog", (req,res) => {
 });
 
 
+// To view the blog by blog id 
+router.get("/:id", async (req,res) => {
+  const blog = await Blog.findById(req.params.id);
+  return res.render("blog", {
+    user: req.user,
+    blog,
+  })
+})
+
+//  *** //
+
+
 // To save the blog in mongodb
 router.post("/", upload.single("coverImage"), async (req,res) => {
     console.log(req.body);
