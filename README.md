@@ -39,4 +39,10 @@
 32. added card for showing the blog in home page in home.ejs
 33. added /:id route in blog route  to view the blog by  specific blog id
 34. created blog.ejs page for viewing the blog in front end.
-
+35. created comment.js model for storing the comment in db.
+36. added comment section  in  blog.js view to show the comment of specific user.
+37. specific user is identified by object Id of user and object id of comment 
+38. use data refrensing in mongodb to share the shema in different models.
+39. added condition for loged in user in comment section view.
+40. added comment route in blog.js routes.
+41. End here.
