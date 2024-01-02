@@ -37,3 +37,6 @@
 30. used middle express.static() to show the blog coverImage in homepage because express thick it is a route
 31. created addblog.ejs page for blog form
 32. added card for showing the blog in home page in home.ejs
+33. added /:id route in blog route  to view the blog by  specific blog id
+34. created blog.ejs page for viewing the blog in front end.
+
